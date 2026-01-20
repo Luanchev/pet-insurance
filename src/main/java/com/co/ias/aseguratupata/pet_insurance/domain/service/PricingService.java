@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-@Service
+
 public class PricingService {
     private static final BigDecimal BASE_PRICE = new BigDecimal("10.00");
     private static final BigDecimal SENIOR_MULTIPLIER = new BigDecimal("1.50"); // +50%
@@ -21,7 +21,7 @@ public class PricingService {
         BigDecimal speciesMultiplier = BigDecimal.valueOf(1 + pet.species().getRiskMultiplier());
         price = price.multiply(speciesMultiplier);
 
-        // 3. Aplicar recargo por edad (mascotas senior)
+        // 3. Aplicar recargo por edad
         if (pet.isSenior()) {
             price = price.multiply(SENIOR_MULTIPLIER);
         }
