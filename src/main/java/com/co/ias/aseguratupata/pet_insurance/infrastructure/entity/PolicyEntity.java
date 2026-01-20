@@ -2,6 +2,8 @@ package com.co.ias.aseguratupata.pet_insurance.infrastructure.entity;
 
 import com.co.ias.aseguratupata.pet_insurance.domain.model.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -9,7 +11,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Table("policies")
-public class PolicyEntity {
+public class PolicyEntity implements Persistable<String> {
     @Id
     private String id;
 
@@ -49,8 +51,8 @@ public class PolicyEntity {
     @Column("issued_at")
     private LocalDateTime issuedAt;
 
-
-    public PolicyEntity() {}
+    @Transient
+    private boolean isNew = true;
 
 
     public PolicyEntity(String id, String quoteId, String ownerName,
@@ -71,6 +73,12 @@ public class PolicyEntity {
         this.monthlyPrice = monthlyPrice;
         this.status = status;
         this.issuedAt = issuedAt;
+        this.isNew = false;  //cuando viene desde la DB
+    }
+
+    // Constructor para crear nuevas entidades
+    public PolicyEntity() {
+        this.isNew = true;
     }
 
     //convertimos esta entidad al modelo de dominio
@@ -102,25 +110,34 @@ public class PolicyEntity {
 
     //Creamos una entidad desde el modelo de dominio
     public static PolicyEntity fromDomain(Policy policy) {
-        return new PolicyEntity(
-                policy.getId(),
-                policy.getQuoteId(),
-                policy.getOwner().name(),
-                policy.getOwner().identificationId(),
-                policy.getOwner().email(),
-                policy.getPet().name(),
-                policy.getPet().species().name(),
-                policy.getPet().breed(),
-                policy.getPet().ageInYears(),
-                policy.getPlan().name(),
-                policy.getMonthlyPrice(),
-                policy.getStatus().name(),
-                policy.getIssuedAt()
-        );
+        PolicyEntity entity = new PolicyEntity();
+        entity.id = policy.getId();
+        entity.quoteId = policy.getQuoteId();
+        entity.ownerName = policy.getOwner().name();
+        entity.ownerIdentificationId = policy.getOwner().identificationId();
+        entity.ownerEmail = policy.getOwner().email();
+        entity.petName = policy.getPet().name();
+        entity.petSpecies = policy.getPet().species().name();
+        entity.petBreed = policy.getPet().breed();
+        entity.petAgeInYears = policy.getPet().ageInYears();
+        entity.plan = policy.getPlan().name();
+        entity.monthlyPrice = policy.getMonthlyPrice();
+        entity.status = policy.getStatus().name();
+        entity.issuedAt = policy.getIssuedAt();
+        entity.isNew = true; // si la policy es nuevo hace un insert
+        return entity;
     }
 
+    // Métodos de Persistable
+    @Override
     public String getId() {
         return id;
+    }
+
+
+    @Override
+    public boolean isNew() {
+        return isNew;
     }
 
     public void setId(String id) {

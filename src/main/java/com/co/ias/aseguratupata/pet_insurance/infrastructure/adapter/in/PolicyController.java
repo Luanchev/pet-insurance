@@ -18,10 +18,6 @@ public class PolicyController {
         this.issuePolicyUseCase = issuePolicyUseCase;
     }
 
-    /**
-     * POST /api/policies
-     * Emite una nueva póliza desde una cotización
-     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<PolicyResponseDTO> issuePolicy(@Valid @RequestBody IssuePolicyRequestDTO requestDTO) {
