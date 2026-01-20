@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15
+    container_name: pet-postgres
+    environment:
+      POSTGRES_DB: pet_insurance
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 250819
+    ports:
+      - "5432:5432"
