@@ -2,17 +2,17 @@ package com.co.ias.aseguratupata.pet_insurance.domain.service;
 
 import com.co.ias.aseguratupata.pet_insurance.domain.model.Pet;
 import com.co.ias.aseguratupata.pet_insurance.domain.model.Plan;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+@Service
 public class PricingService {
     private static final BigDecimal BASE_PRICE = new BigDecimal("10.00");
     private static final BigDecimal SENIOR_MULTIPLIER = new BigDecimal("1.50"); // +50%
 
-    /**
-     * Calcula el precio mensual del seguro
-     */
+
     public BigDecimal calculateMonthlyPrice(Pet pet, Plan plan) {
         // 1. Precio base
         BigDecimal price = BASE_PRICE;

@@ -10,8 +10,10 @@ import com.co.ias.aseguratupata.pet_insurance.domain.event.PolicyIssuedEvent;
 import com.co.ias.aseguratupata.pet_insurance.domain.exception.QuoteNotFoundException;
 import com.co.ias.aseguratupata.pet_insurance.domain.model.Owner;
 import com.co.ias.aseguratupata.pet_insurance.domain.model.Policy;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+@Service
 public class IssuePolicyUseCaseImpl implements IssuePolicyUseCase {
     private final QuoteRepository quoteRepository;
     private final PolicyRepository policyRepository;

@@ -7,10 +7,12 @@ import com.co.ias.aseguratupata.pet_insurance.application.port.out.QuoteReposito
 import com.co.ias.aseguratupata.pet_insurance.domain.model.Pet;
 import com.co.ias.aseguratupata.pet_insurance.domain.model.Quote;
 import com.co.ias.aseguratupata.pet_insurance.domain.service.PricingService;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
 
+@Service
 public class GenerateQuoteUseCaseImpl implements GenerateQuoteUseCase {
     private final QuoteRepository quoteRepository;
     private final PricingService pricingService;

@@ -1,5 +1,9 @@
 package com.co.ias.aseguratupata.pet_insurance.infrastructure.entity;
 
+import com.co.ias.aseguratupata.pet_insurance.domain.model.Pet;
+import com.co.ias.aseguratupata.pet_insurance.domain.model.Plan;
+import com.co.ias.aseguratupata.pet_insurance.domain.model.Quote;
+import com.co.ias.aseguratupata.pet_insurance.domain.model.Species;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
@@ -54,10 +58,6 @@ public class QuoteEntity {
         this.createdAt = createdAt;
         this.expiresAt = expiresAt;
     }
-
-    /**
-     * Convierte esta entidad de persistencia al modelo de dominio
-     */
     public Quote toDomain() {
         Pet pet = new Pet(
                 this.petName,
@@ -76,9 +76,7 @@ public class QuoteEntity {
         );
     }
 
-    /**
-     * Crea una entidad de persistencia desde el modelo de dominio
-     */
+    //convertimos una entidad de persistencia desde el modelo de dominio
     public static QuoteEntity fromDomain(Quote quote) {
         return new QuoteEntity(
                 quote.getId(),
@@ -92,5 +90,6 @@ public class QuoteEntity {
                 quote.getExpiresAt()
         );
     }
+
 
 }
