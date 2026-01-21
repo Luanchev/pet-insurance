@@ -4,7 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class Policy {private final String id;
+public class Policy {
+    private final String id;
     private final String quoteId;
     private final Owner owner;
     private final Pet pet;

@@ -5,7 +5,6 @@ import com.co.ias.aseguratupata.pet_insurance.application.port.in.GenerateQuoteU
 import com.co.ias.aseguratupata.pet_insurance.infrastructure.adapter.in.dto.CreateQuoteRequestDTO;
 import com.co.ias.aseguratupata.pet_insurance.infrastructure.adapter.in.dto.QuoteResponseDTO;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;

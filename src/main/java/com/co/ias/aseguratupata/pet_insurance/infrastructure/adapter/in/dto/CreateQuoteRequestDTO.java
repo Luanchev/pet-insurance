@@ -17,8 +17,8 @@ public record CreateQuoteRequestDTO(
     @NotBlank(message = "La raza es requerida")
     String breed,
 
-    @Min(value = 1, message = "La edad debe ser al menos 1 año")
-    @Max(value = 10, message = "No se aseguran mascotas mayores a 10 años")
+    @Min(value = 1)
+    @Max(value = 10)
     int ageInYears,
 
     @NotNull(message = "El plan es requerido")
