@@ -1,9 +1,5 @@
-package com.co.ias.aseguratupata.pet_insurance.infrastructure.entity;
+package com.co.ias.aseguratupata.pet_insurance.infrastructure.adapter.out.entity;
 
-import com.co.ias.aseguratupata.pet_insurance.domain.model.Pet;
-import com.co.ias.aseguratupata.pet_insurance.domain.model.Plan;
-import com.co.ias.aseguratupata.pet_insurance.domain.model.Quote;
-import com.co.ias.aseguratupata.pet_insurance.domain.model.Species;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.annotation.Transient;
@@ -68,39 +64,7 @@ public class QuoteEntity implements Persistable<String> {
         this.isNew = true;
     }
 
-    public Quote toDomain() {
-        Pet pet = new Pet(
-                this.petName,
-                Species.valueOf(this.petSpecies),
-                this.petBreed,
-                this.petAgeInYears
-        );
 
-        return Quote.reconstruct(
-                this.id,
-                pet,
-                Plan.valueOf(this.plan),
-                this.monthlyPrice,
-                this.createdAt,
-                this.expiresAt
-        );
-    }
-
-    //convertimos una entidad de persistencia desde el modelo de dominio
-    public static QuoteEntity fromDomain(Quote quote) {
-        QuoteEntity entity = new QuoteEntity();
-        entity.id = quote.getId();
-        entity.petName = quote.getPet().name();
-        entity.petSpecies = quote.getPet().species().name();
-        entity.petBreed = quote.getPet().breed();
-        entity.petAgeInYears = quote.getPet().ageInYears();
-        entity.plan = quote.getPlan().name();
-        entity.monthlyPrice = quote.getMonthlyPrice();
-        entity.createdAt = quote.getCreatedAt();
-        entity.expiresAt = quote.getExpiresAt();
-        entity.isNew = true; // Es nuevo, debe hacer INSERT
-        return entity;
-    }
 
     @Override
     public String getId() {

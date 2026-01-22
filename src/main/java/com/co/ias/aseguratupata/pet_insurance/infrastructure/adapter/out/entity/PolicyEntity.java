@@ -1,6 +1,5 @@
-package com.co.ias.aseguratupata.pet_insurance.infrastructure.entity;
+package com.co.ias.aseguratupata.pet_insurance.infrastructure.adapter.out.entity;
 
-import com.co.ias.aseguratupata.pet_insurance.domain.model.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
@@ -81,52 +80,7 @@ public class PolicyEntity implements Persistable<String> {
         this.isNew = true;
     }
 
-    //convertimos esta entidad al modelo de dominio
-    public Policy toDomain() {
-        Owner owner = new Owner(
-                this.ownerName,
-                this.ownerIdentificationId,
-                this.ownerEmail
-        );
 
-        Pet pet = new Pet(
-                this.petName,
-                Species.valueOf(this.petSpecies),
-                this.petBreed,
-                this.petAgeInYears
-        );
-
-        return Policy.reconstruct(
-                this.id,
-                this.quoteId,
-                owner,
-                pet,
-                Plan.valueOf(this.plan),
-                this.monthlyPrice,
-                PolicyStatus.valueOf(this.status),
-                this.issuedAt
-        );
-    }
-
-    //Creamos una entidad desde el modelo de dominio
-    public static PolicyEntity fromDomain(Policy policy) {
-        PolicyEntity entity = new PolicyEntity();
-        entity.id = policy.getId();
-        entity.quoteId = policy.getQuoteId();
-        entity.ownerName = policy.getOwner().name();
-        entity.ownerIdentificationId = policy.getOwner().identificationId();
-        entity.ownerEmail = policy.getOwner().email();
-        entity.petName = policy.getPet().name();
-        entity.petSpecies = policy.getPet().species().name();
-        entity.petBreed = policy.getPet().breed();
-        entity.petAgeInYears = policy.getPet().ageInYears();
-        entity.plan = policy.getPlan().name();
-        entity.monthlyPrice = policy.getMonthlyPrice();
-        entity.status = policy.getStatus().name();
-        entity.issuedAt = policy.getIssuedAt();
-        entity.isNew = true; // si la policy es nuevo hace un insert
-        return entity;
-    }
 
     // Métodos de Persistable
     @Override
