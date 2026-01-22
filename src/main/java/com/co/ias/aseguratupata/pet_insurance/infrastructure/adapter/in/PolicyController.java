@@ -4,7 +4,6 @@ import com.co.ias.aseguratupata.pet_insurance.application.dto.IssuePolicyRequest
 import com.co.ias.aseguratupata.pet_insurance.application.port.in.IssuePolicyUseCase;
 import com.co.ias.aseguratupata.pet_insurance.infrastructure.adapter.in.dto.IssuePolicyRequestDTO;
 import com.co.ias.aseguratupata.pet_insurance.infrastructure.adapter.in.dto.PolicyResponseDTO;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
@@ -20,7 +19,7 @@ public class PolicyController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<PolicyResponseDTO> issuePolicy(@Valid @RequestBody IssuePolicyRequestDTO requestDTO) {
+    public Mono<PolicyResponseDTO> issuePolicy(@RequestBody IssuePolicyRequestDTO requestDTO) {
         // Mapear de DTO REST a DTO de aplicación
         IssuePolicyRequest request = new IssuePolicyRequest(
                 requestDTO.quoteId(),

@@ -21,7 +21,7 @@ public class QuoteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<QuoteResponseDTO> createQuote(@Valid @RequestBody CreateQuoteRequestDTO requestDTO) {
+    public Mono<QuoteResponseDTO> createQuote(@RequestBody CreateQuoteRequestDTO requestDTO) {
         // Mapear de DTO REST a DTO de aplicación
         QuoteRequest request = new QuoteRequest(
                 requestDTO.petName(),
